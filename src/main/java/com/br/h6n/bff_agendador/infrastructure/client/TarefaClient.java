@@ -32,7 +32,7 @@ public interface TarefaClient {
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
         @RequestHeader("Authorization") String token);
 
-    @GetMapping
+    @GetMapping("/tarefas")
     List<TarefaDTOResponse> buscarTarefasPorEmail(@RequestHeader("Authorization") String token);
 
     @DeleteMapping("/tarefas/{id}")
