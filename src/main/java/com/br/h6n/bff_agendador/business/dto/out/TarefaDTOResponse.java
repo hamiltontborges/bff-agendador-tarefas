@@ -2,7 +2,7 @@ package com.br.h6n.bff_agendador.business.dto.out;
 
 import java.time.LocalDateTime;
 
-import com.br.h6n.bff_agendador.infrastructure.client.enums.StatusNotificacaoEnum;
+import com.br.h6n.bff_agendador.business.enums.StatusNotificacaoEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

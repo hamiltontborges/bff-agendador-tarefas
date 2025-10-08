@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.br.h6n.bff_agendador.business.dto.in.TarefaDTORequest;
 import com.br.h6n.bff_agendador.business.dto.out.TarefaDTOResponse;
+import com.br.h6n.bff_agendador.business.enums.StatusNotificacaoEnum;
 import com.br.h6n.bff_agendador.infrastructure.client.TarefaClient;
-import com.br.h6n.bff_agendador.infrastructure.client.enums.StatusNotificacaoEnum;
 
 import lombok.RequiredArgsConstructor;
 

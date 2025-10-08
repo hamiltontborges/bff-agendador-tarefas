@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.br.h6n.bff_agendador.business.dto.in.TarefaDTORequest;
 import com.br.h6n.bff_agendador.business.dto.out.TarefaDTOResponse;
-import com.br.h6n.bff_agendador.infrastructure.client.enums.StatusNotificacaoEnum;
+import com.br.h6n.bff_agendador.business.enums.StatusNotificacaoEnum;
 
 
 @FeignClient(name = "tarefas", url = "${agendador-tarefas.url}")
@@ -39,7 +39,10 @@ public interface TarefaClient {
     void deletarTarefa(@PathVariable String id, @RequestHeader("Authorization") String token);
 
     @PatchMapping("/tarefas/{id}")
-    TarefaDTOResponse alterarStatusNotificacao(@PathVariable String id, @RequestParam StatusNotificacaoEnum status, @RequestHeader("Authorization") String token);
+    TarefaDTOResponse alterarStatusNotificacao(@PathVariable
+            String id, @RequestParam
+                    StatusNotificacaoEnum status, @RequestHeader(value = "Authorization")
+                            String token);
 
     @PutMapping("/tarefas/{id}")
     TarefaDTOResponse atualizarTarefa(@PathVariable String id, @RequestBody TarefaDTORequest tarefaDTO, @RequestHeader("Authorization") String token);

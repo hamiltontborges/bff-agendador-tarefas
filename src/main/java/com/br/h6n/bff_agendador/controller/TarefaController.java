@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.h6n.bff_agendador.business.TarefaService;
 import com.br.h6n.bff_agendador.business.dto.in.TarefaDTORequest;
 import com.br.h6n.bff_agendador.business.dto.out.TarefaDTOResponse;
-import com.br.h6n.bff_agendador.infrastructure.client.enums.StatusNotificacaoEnum;
+import com.br.h6n.bff_agendador.business.enums.StatusNotificacaoEnum;
 import com.br.h6n.bff_agendador.infrastructure.security.SecurityConfig;
 
 import io.swagger.v3.oas.annotations.Operation;

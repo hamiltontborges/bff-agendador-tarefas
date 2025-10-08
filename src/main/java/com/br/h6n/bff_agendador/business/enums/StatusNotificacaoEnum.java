@@ -1,4 +1,4 @@
-package com.br.h6n.bff_agendador.infrastructure.client.enums;
+package com.br.h6n.bff_agendador.business.enums;
 
 public enum StatusNotificacaoEnum {
     PENDENTE, NOTIFICADO, CANCELADO
