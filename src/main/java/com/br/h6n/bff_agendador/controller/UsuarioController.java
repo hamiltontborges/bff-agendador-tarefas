@@ -40,8 +40,9 @@ public class UsuarioController {
     @PostMapping
     @Operation(summary = "Salvar usuário", description = "Endpoint para criar um novo usuário")
     @ApiResponse(responseCode = "200", description = "Usuário salvo com sucesso")
-    @ApiResponse(responseCode = "400", description = "Erro na validação dos dados ou usuário já cadastrado")
+    @ApiResponse(responseCode = "409", description = "Erro na validação dos dados ou usuário já cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<UsuarioDTOResponse> salvaUsuario(@RequestBody UsuarioDTORequest usuarioDTO) {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDTO));
     }
@@ -51,6 +52,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "200", description = "Usuário logado com sucesso")
     @ApiResponse(responseCode = "401", description = "Credenciais inválidas")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public String login(@RequestBody LoginDTORequest usuarioDTO){
         return usuarioService.loginUsuario(usuarioDTO);
     }
@@ -58,8 +60,9 @@ public class UsuarioController {
     @GetMapping
     @Operation(summary = "Buscar usuário por email", description = "Endpoint para buscar um usuário pelo email")
     @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<UsuarioDTOResponse> buscaUsuarioPorEmail(@RequestParam("email") String email, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email, token));
     }
@@ -67,8 +70,9 @@ public class UsuarioController {
     @DeleteMapping("/{email}")
     @Operation(summary = "Deletar usuário por email", description = "Endpoint para deletar um usuário pelo email")
     @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email, @RequestHeader(value = "Authorization", required = false) String token) {
         usuarioService.deletaUsuarioPorEmail(email, token);
         return ResponseEntity.ok().build();
@@ -77,8 +81,9 @@ public class UsuarioController {
     @PutMapping
     @Operation(summary = "Atualizar dados do usuário", description = "Endpoint para atualizar um usuário")
     @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<UsuarioDTOResponse> atualizaUsuario(@RequestBody UsuarioDTORequest usuarioDTO, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.atualizaUsuario(usuarioDTO, token));
     }
@@ -86,8 +91,9 @@ public class UsuarioController {
     @PutMapping("/enderecos/{id}")
     @Operation(summary = "Atualizar dados do endereço do usuário", description = "Endpoint para atualizar um endereço")
     @ApiResponse(responseCode = "200", description = "Endereço do usuário atualizado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Endereço não encontrado")
+    @ApiResponse(responseCode = "403", description = "Endereço não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<EnderecoDTOResponse> atualizaEndereco(@RequestBody EnderecoDTORequest enderecoDTO, @PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.atualizaEndereco(id, enderecoDTO, token));
     }
@@ -95,8 +101,9 @@ public class UsuarioController {
     @PutMapping("/telefones/{id}")
     @Operation(summary = "Atualizar dados do telefone do usuário", description = "Endpoint para atualizar um telefone")
     @ApiResponse(responseCode = "200", description = "Telefone do usuário atualizado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Telefone não encontrado")
+    @ApiResponse(responseCode = "403", description = "Telefone não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<TelefoneDTOResponse> atualizaTelefone(@RequestBody TelefoneDTORequest telefoneDTO, @PathVariable Long id, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.atualizaTelefone(id, telefoneDTO, token));
     }
@@ -104,8 +111,9 @@ public class UsuarioController {
     @PostMapping("/enderecos")
     @Operation(summary = "Salvar endereço do usuário", description = "Endpoint para salvar um endereço")
     @ApiResponse(responseCode = "200", description = "Endereço do usuário salvo com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<EnderecoDTOResponse> cadastraEndereco(@RequestBody EnderecoDTORequest enderecoDTO, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.cadastraEndereco(enderecoDTO, token));
     }
@@ -113,8 +121,9 @@ public class UsuarioController {
     @PostMapping("/telefones")
     @Operation(summary = "Salvar telefone do usuário", description = "Endpoint para salvar um telefone")
     @ApiResponse(responseCode = "200", description = "Telefone do usuário salvo com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<TelefoneDTOResponse> cadastraTelefone(@RequestBody TelefoneDTORequest telefoneDTO, @RequestHeader(value = "Authorization", required = false) String token) {
         return ResponseEntity.ok(usuarioService.cadastraTelefone(telefoneDTO, token));
     }

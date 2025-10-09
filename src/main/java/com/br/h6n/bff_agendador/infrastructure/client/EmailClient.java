@@ -10,7 +10,7 @@ import com.br.h6n.bff_agendador.business.dto.out.TarefaDTOResponse;
 @FeignClient(name = "notificacao", url = "${notificacao.url}")
 public interface EmailClient {
 
-    @PostMapping
+    @PostMapping("/email")
     void enviarEmail(@RequestBody TarefaDTOResponse tarefaDTO);
 
 }
