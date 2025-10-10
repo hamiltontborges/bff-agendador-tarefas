@@ -17,6 +17,7 @@ import com.br.h6n.bff_agendador.business.dto.in.UsuarioDTORequest;
 import com.br.h6n.bff_agendador.business.dto.out.EnderecoDTOResponse;
 import com.br.h6n.bff_agendador.business.dto.out.TelefoneDTOResponse;
 import com.br.h6n.bff_agendador.business.dto.out.UsuarioDTOResponse;
+import com.br.h6n.bff_agendador.business.dto.out.ViaCepDTOResponse;
 
 @FeignClient(name = "usuarios", url = "${usuario.url}")
 public interface UsuarioClient {
@@ -47,4 +48,7 @@ public interface UsuarioClient {
 
     @PostMapping("/usuarios/telefones")
     TelefoneDTOResponse cadastraTelefone(@RequestBody TelefoneDTORequest telefoneDTO, @RequestHeader("Authorization") String token);
+
+    @GetMapping("/usuarios/enderecos/cep/{cep}")
+    ViaCepDTOResponse buscarDadosCep(@PathVariable String cep);
 }
