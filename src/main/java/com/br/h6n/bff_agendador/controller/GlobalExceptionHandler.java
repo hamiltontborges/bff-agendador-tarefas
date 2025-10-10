@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.br.h6n.bff_agendador.infrastructure.exceptions.ConflictException;
+import com.br.h6n.bff_agendador.infrastructure.exceptions.IllegalArgumentException;
 import com.br.h6n.bff_agendador.infrastructure.exceptions.ResourceNotFoundException;
 import com.br.h6n.bff_agendador.infrastructure.exceptions.UnauthorizedException;
 
@@ -25,6 +26,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<String> handleUnauthorizedException(UnauthorizedException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
     
 }
