@@ -33,12 +33,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor
 @Tag(name = "Usuários", description = "Endpoints para gerenciamento de usuários")
+// @CrossOrigin(origins = {"http://localhost:4200"}) // Exemplo de uso do CORS para um controller
 @SecurityRequirement(name = SecurityConfig.SECURITY_SCHEMA)
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
     
     @PostMapping
+    // @CrossOrigin(origins = {"http://localhost:4200"}) // Exemplo de uso do CORS para um método específico
     @Operation(summary = "Salvar usuário", description = "Endpoint para criar um novo usuário")
     @ApiResponse(responseCode = "200", description = "Usuário salvo com sucesso")
     @ApiResponse(responseCode = "409", description = "Erro na validação dos dados ou usuário já cadastrado")
