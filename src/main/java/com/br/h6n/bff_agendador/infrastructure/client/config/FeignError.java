@@ -18,18 +18,19 @@ public class FeignError implements ErrorDecoder{
     public Exception decode(String s, Response response) {
 
         String mensagemErro = mensagemErro(response);
+        String erro = "ERROR: ";
         
         switch (response.status()) {
             case 409:
-                return new ConflictException("ERROR: " + mensagemErro);
+                return new ConflictException(erro + mensagemErro);
             case 403:
-                return new ResourceNotFoundException("ERROR: " + mensagemErro);
+                return new ResourceNotFoundException(erro + mensagemErro);
             case 401:
-                return new UnauthorizedException("ERROR: " + mensagemErro);
+                return new UnauthorizedException(erro + mensagemErro);
             case 400:
-                return new IllegalArgumentException("ERROR: " + mensagemErro);
+                return new IllegalArgumentException(erro + mensagemErro);
             default:
-                return new BusinessException("ERROR: " + mensagemErro);
+                return new BusinessException(erro + mensagemErro);
         }
     }
 
